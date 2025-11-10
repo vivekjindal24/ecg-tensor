@@ -61,3 +61,47 @@ A checkpoint will be saved under `artifacts/models`.
 - Build tensor constructions and try CP/Tucker/HOSVD with TensorLy.
 - Wire MLflow logging (params, metrics, artifacts) and Grad-CAM/Captum for interpretability.
 - Add evaluation notebook cells for AUC/F1, reliability diagrams, and LaTeX tables.
+
+## Unified Label Mapping Integration
+The preprocessing pipeline now consumes a consolidated label mapping at `logs/unified_label_mapping.csv`, producing five standardized classes:
+
+Index mapping:
+- 0 = MI
+- 1 = AF
+- 2 = BBB
+- 3 = NORM
+- 4 = OTHER
+
+Artifacts generated during preprocessing:
+- `artifacts/processed/train.npz`, `val.npz`, `test.npz` with keys: `x`, `y`, `signal`, `label`
+- `artifacts/processed/labels.npy` — ordered label names
+- `artifacts/processed/label_map.json` — forward and reverse mappings
+- `artifacts/processed/splits.json` — counts and metadata
+
+To regenerate:
+```powershell
+# Run notebook preprocessing cell OR convert to script:
+python - <<'PY'
+from pathlib import Path
+import runpy
+# (Optionally extract preprocessing logic into a script for CI)
+runpy.run_path('ecg_tensor_pipeline.ipynb')  # if executed with a tool that supports .ipynb
+PY
+```
+
+## FastAPI Serving
+After training, launch an inference API:
+```powershell
+uvicorn ecg_tensor_pipeline:app --reload --port 8000
+```
+POST a file to `/predict` (.csv or .npy) containing a single ECG signal (length variable; auto-resampled to 5000 @ 500 Hz).
+
+## Git Usage
+```powershell
+# Initial commit (already performed by automation)
+git add .
+git commit -m "Initial commit: unified ECG tensor pipeline"
+# Push to remote (set your remote URL first)
+git remote add origin https://github.com/vivekjindal24/ecg-tensor.git
+git push -u origin master
+```
