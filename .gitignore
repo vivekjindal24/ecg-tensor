@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+.venv1/
+venv/
+ENV/
+*.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Local data and artifacts (do not version large binaries)
+dataset/
+artifacts/
+mlflow/
+mlruns/
+logs/
+figures/
+backups/
+
+# Cache
+*.log
+*.tmp
+*.cache/
+__cache__/
+
+# Misc
+workspace_tree.txt
+

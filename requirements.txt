@@ -1,0 +1,31 @@
+# Core scientific stack
+numpy==1.26.4
+scipy==1.11.4
+pandas==2.1.2
+scikit-learn==1.3.2
+matplotlib==3.8.0
+seaborn==0.13.0
+plotly==5.18.0
+
+# Deep learning & tensor operations
+# Tip: For GPU support on Windows, install PyTorch using the selector at https://pytorch.org/get-started/locally/
+# and then adjust/override the versions below if needed.
+torch>=2.1.0
+torchvision>=0.16.0
+tensorly==0.8.1
+
+# Experiment tracking & interpretability
+mlflow==2.8.1
+captum==0.6.0
+
+# ECG domain libraries
+wfdb==4.1.2
+neurokit2==0.2.7
+
+# Optional utilities
+rich==13.6.0
+pyyaml==6.0.1
+fastapi==0.115.3
+uvicorn[standard]==0.30.3
+
+# NOTE: For GPU support ensure the appropriate torch wheels (CUDA 12.x for RTX 4050) if mismatch occurs.
